@@ -122,7 +122,7 @@ def askChatGPTOriginal(text):
             "Step 3) Tally the overall grade and give an overall summary."
 
     query = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-5",
         messages=[
             {
                 "role": "system", 
