@@ -131,8 +131,7 @@ def askChatGPTOriginal(text):
             {
                 "role": "user", 
                 "content": text
-            }],
-        temperature=0.1
+            }]
     )
   
     response = query.choices[0].message.content 
@@ -163,6 +162,7 @@ class Grade(BaseModel):
 
 def askChatGPTForScore(text):
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    print(os.getenv("OPENAI_API_KEY"))
     
     # Text prompt to generate scores for the given reflection text
     file_path = os.path.join(settings.BASE_DIR, "feedback/prompts/prompt_for_scores.txt")
@@ -174,7 +174,7 @@ def askChatGPTForScore(text):
 
     for i in range(3):
         query = client.beta.chat.completions.parse(
-            model="gpt-4o",
+            model="gpt-5",
             messages=[
                 {
                     "role": "system", 
@@ -230,7 +230,7 @@ def askChatGPTForFeedback(text, scores):
     f.close()
 
     query = client.beta.chat.completions.parse(
-        model="gpt-4o",
+        model="gpt-5",
         messages=[
             {
                 "role": "system", 
@@ -240,7 +240,6 @@ def askChatGPTForFeedback(text, scores):
                 "role": "user", 
                 "content": full_text
             }],
-        temperature=1,
         response_format=Feedback
     )
   
